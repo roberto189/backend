@@ -4,9 +4,13 @@ const reviews = require('./review');
 
 const toolSchema = new Schema(
 {
-    tool_id:{
-        type: ID,
-    },
+    // tool_id:{
+    //     type: ID,
+    // },
+    toolId: {
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId(),
+      },
     toolName:{
         type: String,
         required: true,
