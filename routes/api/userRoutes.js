@@ -1,3 +1,19 @@
+// const router = require('express').Router();
+// // const {
+// //   getUsers,
+// //   getSingleUser,
+// //   createUser,
+// // } = require('../../controllers/userController');
+
+// // /api/users
+// router.route('/').get(getUsers).post(createUser);
+
+// // /api/users/:userId
+// router.route('/:userId').get(getSingleUser);
+
+// module.exports = router;
+
+
 const router = require('express').Router();
 const {user} = require('../../models');
 const bcrypt = require("bcrypt")
@@ -19,7 +35,6 @@ router.post("/",async(req,res)=>{
 router.get("/",async(req,res)=>{
   user.find()
       .then(async (users) => {
-      
         return res.json(users);
       })
       .catch((err) => {
@@ -27,4 +42,9 @@ router.get("/",async(req,res)=>{
         return res.status(500).json(err);
       });
 })
+router.get("/:id"), async (req, res)=>{
+    const user = await user.findOne({userId: req.params.id})
+    res.send(user)
+}
+
 module.exports = router;

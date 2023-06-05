@@ -1,15 +1,14 @@
-const router = require('express').Router();
-const {
-  getcategory,
-  getSinglecategory,
-  createcategory,
-  deletecategory,
-} = require('../../controllers/categoryController');
+// const router = require('express').Router();
+// const {
+//   getcategory,
+//   getSinglecategory,
+//   createcategory,
+// } = require('../../controllers/categoryController');
 
-// /api/category
-router.route('/').get(getcategory).post(createcategory);
+// // /api/category
+// router.route('/api/category').get(getcategory).post(createcategory);
 
-// /api/category/:category_id
-router.route('/:category_id').get(getSinglecategory).delete(deletecategory);
+// // /api/categorys/:categoryId
+// router.route('/:categoryId').get(getSinglecategory);
 
-module.exports = router;
+// module.exports = router;

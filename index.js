@@ -4,6 +4,7 @@ const routes = require('./routes');
 
 const cwd = process.cwd();
 
+const uri = process.env.MONGODB_URI;
 const PORT = process.env.PORT || 3001;
 const app = express();
 
