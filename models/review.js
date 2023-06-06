@@ -7,15 +7,19 @@ const reviewSchema = new Schema(
     // review_id:{
     //     type: ID
     // },
-    reviewId: {
-        type: Schema.Types.ObjectId,
-        default: () => new Types.ObjectId(),
-      },
-    rating:{
-        type:Number,
-        required: true,
-        integer: true,
-        //Maxvalue: 5,
+    // reviewId: {
+    //     type: Schema.Types.ObjectId,
+    //     default: () => new Types.ObjectId(),
+    //   },
+    // rating:{
+    //     type:Number,
+    //     required: true,
+    //     integer: true,
+    //     //Maxvalue: 5,
+    // },
+    feedback: {
+        type:String,
+        required: true
     },
     createdAt: {
         type: Date,

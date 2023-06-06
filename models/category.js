@@ -14,10 +14,10 @@ const categorySchema = new Schema(
         required: true,
         unique: true,
     },
-    backgroundImage: {
-        type: String,
-        required: true,
-    },
+    // backgroundImage: {
+    //     type: String,
+    //     required: true,
+    // },
     tool: [{ type: Schema.Types.ObjectId, ref: 'tool' }],
 }
 );
