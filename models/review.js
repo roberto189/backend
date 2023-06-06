@@ -11,12 +11,12 @@ const reviewSchema = new Schema(
     //     type: Schema.Types.ObjectId,
     //     default: () => new Types.ObjectId(),
     //   },
-    // rating:{
-    //     type:Number,
-    //     required: true,
-    //     integer: true,
-    //     //Maxvalue: 5,
-    // },
+    rating:{
+        type:Number,
+        required: true,
+        integer: true,
+        //Maxvalue: 5,
+    },
     feedback: {
         type:String,
         required: true

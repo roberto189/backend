@@ -1,23 +1,22 @@
 const router = require('express').Router();
-const {review} = require('../../models');
-// const {review} = require('../../models');
+const { reviews } = require('../../models');
 
 router.post("/", async (req, res) => {
-  const newreview = new review({ ...req.body });
-  const insertedreview = await newreview.save();
-  return res.status(201).json(insertedreview);
+  const newreviews = new reviews ({ ...req.body });
+  const insertedreviews = await newreviews.save();
+  return res.status(201).json(insertedreviews);
 });
 
 router.get("/", async (req, res) => {
-  const allreviews = await review.find();
+  const allreviews = await reviews.find();
   return res.status(200).json(allreviews);
 });
 router.get("/:id", async(req, res) => {
-  review.findOne({ _id: req.params.reviewId })
-  .then((review) =>
-    !review
-      ? res.status(404).json({ message: 'No review with that ID' })
-      : res.json(review)
+  reviews.findOne({ _id: req.params.reviewsId })
+  .then((reviews) =>
+    !reviews
+      ? res.status(404).json({ message: 'No reviews with that ID' })
+      : res.json(reviews)
   )
   .catch((err) => res.status(500).json(err));
 })
