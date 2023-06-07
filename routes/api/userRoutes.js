@@ -42,9 +42,20 @@ router.get("/",async(req,res)=>{
         return res.status(500).json(err);
       });
 })
-router.get("/:id"), async (req, res)=>{
-    const user = await user.findOne({userId: req.params.id})
-    res.send(user)
-}
+router.get("/:userId",async(req,res) => {
+user.findOne({ _id: req.params.userId })
+// .select('-__v')
+.then((user) =>
+  !user
+    ? res.status(404).json({ message: 'No user with that ID' })
+    : res.json(user)
+)
+.catch((err) => res.status(500).json(err));
+})
+// router.get("/:userid"), async (req, res)=>{
+//     const user = await user.findOne({_Id: req.params.id})
+//     .select('-__v')
+//     res.send(user)
+// }
 
 module.exports = router;

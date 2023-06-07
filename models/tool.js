@@ -1,6 +1,6 @@
 const { link } = require('fs');
 const { Schema, model, Types } = require('mongoose');
-const reviews = require('./review');
+// const reviews = require('./review');
 
 const toolSchema = new Schema(
 {
@@ -19,7 +19,7 @@ const toolSchema = new Schema(
     amazonLink:{
         type: String,
     },
-    reviews: [{ type: Schema.Types.ObjectId, ref: 'reviews' }],
+    // reviews: [{ type: Schema.Types.ObjectId, ref: 'reviews' }],
 },
 );
 const tool = model('tool', toolSchema);

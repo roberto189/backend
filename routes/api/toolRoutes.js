@@ -1,27 +1,58 @@
 
 const router = require('express').Router();
-const {tool} = require('../../models');
+const {tool, category} = require('../../models');
 // const {review} = require('../../models');
 
-router.post("/", async (req, res) => {
-  const newtool = new tool({ ...req.body });
-  const insertedtool = await newtool.save();
-  return res.status(201).json(insertedtool);
+router.post("/:categoryid", async (req, res) => {
+  try {
+    const newtool = new tool({ ...req.body });
+    const insertedtool = await newtool.save();
+    const updatedcategory = await category.findOneAndUpdate(
+      { _id: req.params.categoryid },
+      { $addToSet: { tool: newtool } },
+      { runValidators: true, new: true }
+    )
+
+    return res.status(201).json(updatedcategory);
+  
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
 });
 
 router.get("/", async (req, res) => {
+try {
   const alltools = await tool.find();
   return res.status(200).json(alltools);
+} catch (error) {
+  console.log(error)
+    res.status(500).json(error)
+}
 });
-router.get("/:id", async(req, res) => {
-  tool.findOne({ _id: req.params._id })
-  .then((tool) =>
-  !tool
-  ? res.status(404).json({ message: 'No tool with that ID' })
-  : res.json(tool)
-  )
-  .catch((err) => res.status(500).json(err));
-}),
+router.delete("/:categoryid/:toolid", async (req, res) =>{
+  try {
+    const updatedtool = await category.findOneAndUpdate(
+      { _id: req.params.categoryid },
+      { $pull: { tool: { _id: req.params.toolid } } },
+      { runValidators: true, new: true }
+    )
+    return res.status(200).json(updatedtool);
+
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+})
+// router.get("/:toolid", async(req, res) => {
+//   tool.findOne({ _id: req.params.id })
+//   .then((tool) =>
+//   !tool
+//   ? res.status(404).json({ message: 'No tool with that ID' })
+//   : res.json(tool)
+//   )
+//   .catch((err) => res.status(500).json(err));
+// }),
 module.exports = router;
 //     tool.findOne({ _id: req.params.toolId })
 //     .then((tool) =>
