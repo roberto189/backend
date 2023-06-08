@@ -44,15 +44,15 @@ router.delete("/:categoryid/:toolid", async (req, res) =>{
     res.status(500).json(error)
   }
 })
-// router.get("/:toolid", async(req, res) => {
-//   tool.findOne({ _id: req.params.id })
-//   .then((tool) =>
-//   !tool
-//   ? res.status(404).json({ message: 'No tool with that ID' })
-//   : res.json(tool)
-//   )
-//   .catch((err) => res.status(500).json(err));
-// }),
+router.get("/:toolid", async(req, res) => {
+  tool.findOne({ _id: req.params.id })
+  .then((tool) =>
+  !tool
+  ? res.status(404).json({ message: 'No tool with that ID' })
+  : res.json(tool)
+  )
+  .catch((err) => res.status(500).json(err));
+}),
 module.exports = router;
 //     tool.findOne({ _id: req.params.toolId })
 //     .then((tool) =>

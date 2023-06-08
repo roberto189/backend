@@ -1,22 +1,22 @@
-// const router = require('express').Router();
-// // const {
-// //   getUsers,
-// //   getSingleUser,
-// //   createUser,
-// // } = require('../../controllers/userController');
-
-// // /api/users
-// router.route('/').get(getUsers).post(createUser);
-
-// // /api/users/:userId
-// router.route('/:userId').get(getSingleUser);
-
-// module.exports = router;
-
-
 const router = require('express').Router();
 const {user} = require('../../models');
 const bcrypt = require("bcrypt")
+
+router.post("/login", async (req,res)=>{
+  user.findOne({
+      where:{
+          username:req.body.username
+      }
+  }).then(founduser=>{
+      if(!founduser){
+          return res.status(401).json({msg:"invalid username"})
+      } else if(!bcrypt.compareSync(req.body.password,founduser.password)){
+          return res.status(401).json({msg:"invalid password"})
+      } else {
+         return res.json(founduser)
+      }
+  })
+})
 
 router.post("/",async(req,res)=>{
   try {
