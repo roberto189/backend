@@ -26,6 +26,8 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:categoryid", async(req, res) => {
+
+  console.log("GET ALL category!")
   category.findOne({ _id: req.params.categoryid })
   .select('-__v')
   .populate('tool')
@@ -35,7 +37,18 @@ router.get("/:categoryid", async(req, res) => {
   : res.json(category)
   )
   .catch((err) => res.status(500).json(err));
-}),
+});
+// router.get("/:categoryid/tools", async (req, res) => {
+//   category.findOne({ _id: req.params.categoryid })
+//   .select('-__v')
+//   .populate('tool')
+//   .then((category) =>
+//   !category
+//   ? res.status(404).json({ message: 'No category with that ID' })
+//   : res.json(category.tool)
+//   )
+//   .catch((err) => res.status(500).json(err));
+// });
 router.delete("/:categoryid", async (req,res)=>{
   category.findOneAndDelete({ _id: req.params.categoryid })
       .then((category) =>{

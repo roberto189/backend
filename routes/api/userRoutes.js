@@ -32,6 +32,7 @@ router.post("/", async (req, res) => {
   }
 })
 router.get("/", async (req, res) => {
+  console.log("GET ALL USERS!")
   user.find()
     .then(async (users) => {
       return res.json(users);
